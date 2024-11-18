@@ -18,5 +18,5 @@ const bookingSchema = new mongoose.Schema({
     phone: String,
     email: String
 });
-
+//this is changes
 module.exports = mongoose.model('Booking', bookingSchema);
