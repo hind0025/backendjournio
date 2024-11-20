@@ -81,6 +81,7 @@ app.get('/hotel', (req, res) => {
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'Public', 'journio', 'login.html'));
 });
+console.log("CHANGE TEST")
 
 // ===== Error Handling Middleware =====
 // app.use((req, res, next) => {
