@@ -5,6 +5,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 console.log("qwew")
+console.log("qwew")
+
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI, {
