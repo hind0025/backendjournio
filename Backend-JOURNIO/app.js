@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 require('dotenv').config(); 
 const bodyParser = require('body-parser');
 const bookingRoutes = require('./routes/booking');
+const ratingRoutes = require('./routes/Ratingroute');
+
 
 const app = express();
 app.use('/api', bookingRoutes);
@@ -30,6 +32,9 @@ app.get('/hotel', (req, res) => {
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'Public', 'journio', 'login.html'));
 });
+
+app.use('/api/ratings', ratingRoutes);
+
 
 const authRoutes = require('./routes/auth'); 
 app.use('/api/auth', authRoutes);
