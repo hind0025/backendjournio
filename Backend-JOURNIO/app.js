@@ -83,14 +83,14 @@ app.get('/login', (req, res) => {
 });
 
 // ===== Error Handling Middleware =====
-app.use((req, res, next) => {
-    res.status(404).json({ error: 'Route not found' });
-});
+// app.use((req, res, next) => {
+//     res.status(404).json({ error: 'Route not found' });
+// });
 
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ error: 'Internal server error' });
-});
+// app.use((err, req, res, next) => {
+//     console.error(err.stack);
+//     res.status(500).json({ error: 'Internal server error' });
+// });
 
 // ===== Start Server =====
 const PORT = process.env.PORT || 3001; // Use environment variable or default to 3001
