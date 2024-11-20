@@ -82,7 +82,7 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'Public', 'journio', 'login.html'));
 });
 console.log("CHANGE TEST");
-console.log
+console.log("TQWWT")
 
 // ===== Error Handling Middleware =====
 // app.use((req, res, next) => {
