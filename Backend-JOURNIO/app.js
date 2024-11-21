@@ -35,6 +35,13 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'Public', 'journio', 'login.html'));
 });
 
+
+
+app.get('/chat', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Public','journio', 'gemini-chat.html'));
+});
+
+
 app.use('/api/ratings', ratingRoutes);
 
 
