@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const bookingRoutes = require('./routes/booking');
 const ratingRoutes = require('./routes/Ratingroute');
 const geminiRoutes = require('./routes/gemini');
-
 const paymentRoutes = require('./routes/paymentRoutes');
 const app = express();
 app.use('/api', bookingRoutes);
