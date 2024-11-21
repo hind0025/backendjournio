@@ -812,6 +812,40 @@ address {
 .footer-bottom-link:is(:hover, :focus) { color: var(--white); }
 
 
+/* Footer Form Button Styling (both Subscribe and Feedback) */
+.footer-form .btn {
+  background-color: var(--bright-navy-blue);
+  color: var(--white);
+  padding: 12px 30px;
+  font-size: 16px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.footer-form .btn:hover {
+  background-color: var(--white);
+  color: var(--bright-navy-blue);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsiveness for both Subscribe and Feedback Buttons */
+@media (max-width: 768px) {
+  .footer-form .btn {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-form .btn {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
 
 
 

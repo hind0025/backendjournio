@@ -1,0 +1,143 @@
+/* General Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.feedback-container {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin-top: -50px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.feedback-box {
+    text-align: center;
+}
+
+.feedback-title {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+.feedback-subtitle {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.feedback-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group label {
+    font-size: 0.95rem;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+    transition: 0.3s;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus,
+.input-group textarea:focus {
+    border-color: #4e73df;
+    outline: none;
+    background-color: #fff;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.submit-btn {
+    padding: 12px 20px;
+    background-color: #4e73df;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #355ab4;
+    transform: translateY(-3px);
+}
+
+.submit-btn:active {
+    background-color: #25418c;
+    transform: translateY(1px);
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .feedback-container {
+        padding: 30px;
+    }
+
+    .feedback-title {
+        font-size: 1.6rem;
+    }
+
+    .feedback-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .input-group input,
+    .input-group select,
+    .input-group textarea {
+        font-size: 0.95rem;
+    }
+
+    .submit-btn {
+        font-size: 0.95rem;
+        padding: 10px 15px;
+    }
+}
