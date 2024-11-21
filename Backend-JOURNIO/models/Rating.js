@@ -7,11 +7,12 @@ const ratingSchema = new mongoose.Schema({
     //ref: 'User',
     required: true,
   },
-  // Email : {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   //ref: 'Service', // Assume services are stored in a Service model
-  //   required: true,
-  // },
+  Email : {
+    //type: mongoose.Schema.Types.ObjectId,
+    type:String,
+    //ref: 'Service', // Assume services are stored in a Service model
+    required: true,
+  },
   Rating: {
     type: String,
     

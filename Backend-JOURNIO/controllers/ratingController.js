@@ -2,10 +2,10 @@ const RatingModel = require('../models/Rating');
 
 // Submit rating and feedback
 const submitRating = async (req, res) => {
-  const { Name,  Rating, Comments } = req.body;
+  const { Name,Email,  Rating, Comments } = req.body;
 
   try {
-    const newRating = new RatingModel({ Name, Rating, Comments });
+    const newRating = new RatingModel({ Name,Email, Rating, Comments });
     await newRating.save();
 
     res.status(201).json({ message: 'Rating submitted successfully!'});
