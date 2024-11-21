@@ -1,68 +1,82 @@
-// public/js/stripe.js
+// Initialize Stripe with your public key
+const stripe = Stripe('pk_test_51QNAizDIcVDYJAHhmj4kZo75z2mv2SkCuUazXAYV31csnTVGJ0n0V9WLPQ0ruEwKkmJ91IFZSH5FOTB6agAutJ7l00PNX6saAl');
 
-// Set your Stripe publishable key
-const stripe = Stripe('pk_test_51QNAizDIcVDYJAHhmj4kZo75z2mv2SkCuUazXAYV31csnTVGJ0n0V9WLPQ0ruEwKkmJ91IFZSH5FOTB6agAutJ7l00PNX6saAl');  // Replace with your Stripe publishable key
+// Create an instance of Elements
 const elements = stripe.elements();
 const card = elements.create('card');
 
-// Add the card element to the form
+// Mount the card element to the DOM
 card.mount('#card-element');
 
-// Handle form submission
+// Get the payment form element
 const form = document.getElementById('payment-form');
+
+// Handle form submission
 form.addEventListener('submit', async (event) => {
-    event.preventDefault();
+    event.preventDefault(); // Prevent default form submission
 
-    // Get the amount to charge from your package detail
-    const amount = 46500;  // Example amount in smallest unit (INR paise for ₹46,500)
-    const currency = 'inr';  // Currency for payment
+    // Retrieve the cardholder name from the input field
+    const nameInput = document.getElementById('name');
+    if (!nameInput) {
+        console.error('Cardholder name input not found.');
+        alert('Please enter your name.');
+        return; // Exit early if the input is missing
+    }
+    const name = nameInput.value.trim();
 
-    // Call backend to create payment intent
-    const response = await fetch('/api/payments/create-payment-intent', {  // Update URL here
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ amount, currency })
-    });
-
-    const data = await response.json();
-
-    if (data.error) {
-        console.error(data.error);
-        alert('Failed to create payment intent');
-        return;
+    if (!name) {
+        alert('Cardholder name is required.');
+        return; // Exit early if the name is empty
     }
 
-    // Use the clientSecret received from backend to confirm the payment
-    const { clientSecret } = data;
+    // Payment details
+    const amount = 46500; // Example amount in smallest currency unit (e.g., INR paise for ₹46,500)
+    const currency = 'inr'; // Payment currency
 
-    const {token, error} = await stripe.createToken(card);
-
-    if (error) {
-        console.error(error);
-        alert('Error creating payment token.');
-    } else {
-        // Send the token and clientSecret to the backend for final processing
-        const paymentResponse = await fetch('/api/payments/charge', {  // Update URL here as well
+    try {
+        // Step 1: Create a PaymentIntent via your backend
+        const intentResponse = await fetch('http://127.0.0.1:5000/api/payments/create-payment-intent', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                token,
-                clientSecret,
-                name: document.getElementById('name').value,
-            }),
+            body: JSON.stringify({ amount, currency }),
         });
 
-        const result = await paymentResponse.json();
+        const intentData = await intentResponse.json();
 
-        if (paymentResponse.ok) {
-            alert('Payment successful!');
-            window.location.href = '/';  // Redirect to homepage or confirmation page
-        } else {
-            alert('Payment failed.');
+        if (!intentResponse.ok || !intentData.clientSecret) {
+            console.error('Error creating PaymentIntent:', intentData.error || 'Unknown error');
+            alert('Failed to create PaymentIntent.');
+            return;
         }
+
+        const { clientSecret } = intentData;
+
+        // Step 2: Confirm the card payment using Stripe.js
+        const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name,
+                },
+            },
+        });
+
+        if (error) {
+            console.error('Error confirming card payment:', error);
+            alert(`Payment failed: ${error.message}`);
+            return;
+        }
+
+        if (paymentIntent && paymentIntent.status === 'succeeded') {
+            alert('Payment successful!');
+            window.location.href = '/index.html'; // Redirect to a success page
+        } else {
+            alert('Payment failed. Please try again.');
+        }
+    } catch (err) {
+        console.error('Error processing payment:', err);
+        alert('An error occurred while processing your payment.');
     }
 });

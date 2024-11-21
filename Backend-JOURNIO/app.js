@@ -7,7 +7,9 @@ const bookingRoutes = require('./routes/booking');
 const ratingRoutes = require('./routes/Ratingroute');
 const geminiRoutes = require('./routes/gemini');
 const paymentRoutes = require('./routes/paymentRoutes');
+const cors = require('cors');
 const app = express();
+app.use(cors());
 app.use('/api', bookingRoutes);
 app.use(express.urlencoded({ extended: true }));
 

@@ -21,10 +21,7 @@ body {
     text-align: center;
   }
   
-  #card-element {
-    margin-bottom: 20px;
-  }
-  
+
   #card-errors {
     color: red;
     font-size: 14px;
@@ -46,3 +43,39 @@ body {
     background-color: #ccc;
   }
   
+  .container {
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+#name {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+}
+
+#card-element {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+button#submit {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button#submit:hover {
+    background-color: #0056b3;
+}
