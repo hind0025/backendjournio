@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe Payment</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <link rel="stylesheet" href="stripe-check.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Complete Your Payment</h2>
+    <form id="payment-form">
+      <!-- Cardholder Name Input -->
+      <div class="form-group">
+        <label for="name">Cardholder Name</label>
+        <input type="text" id="name" placeholder="Enter your name" required />
+      </div>
+
+      <!-- Stripe Card Element -->
+      <div id="card-element">
+        <!-- A Stripe Element will be inserted here. -->
+      </div>
+
+      <!-- Display errors for the card input -->
+      <div id="card-errors" role="alert"></div>
+
+      <!-- Submit Button -->
+      <button id="submit">Pay Now</button>
+    </form>
+  </div>
+  
+  <script src="assets/js/stripe.js"></script>
+</body>
+</html>

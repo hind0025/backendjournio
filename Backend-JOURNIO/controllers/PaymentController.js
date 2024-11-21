@@ -9,6 +9,9 @@ const createPaymentIntent = async (req, res) => {
       payment_method_types: ['card'],
     });
 
+
+    console.log(paymentIntent);
+
     res.status(200).json({
       clientSecret: paymentIntent.client_secret, // Use this clientSecret on the frontend
     });
@@ -16,6 +19,55 @@ const createPaymentIntent = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+
+
+
+
+
+
+
+// Handle Charge Payment (After the token is sent from frontend)
+const chargePayment = async (req, res) => {
+  const { token, clientSecret, name } = req.body; // Get token, clientSecret, and name from request body
+
+  try {
+    // Confirm the paymentIntent using the received clientSecret and payment method (token)
+    const paymentIntent = await stripe.paymentIntents.confirm(clientSecret, {
+      payment_method: token.id,  // Use the token's id for payment confirmation
+    });
+
+    // Handle successful payment
+    if (paymentIntent.status === 'succeeded') {
+      console.log('Payment succeeded:', paymentIntent);
+
+      res.status(200).json({
+        success: true,
+        message: 'Payment completed successfully!',
+      });
+    } else {
+      // Payment failed
+      res.status(400).json({
+        success: false,
+        message: 'Payment failed.',
+      });
+    }
+  } catch (error) {
+    console.error('Error confirming payment:', error.message);
+    res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
+};
+
+
+
+
+
+
+
+
 
 // Handle Webhooks (optional for event handling)
 const handleWebhook = (req, res) => {
@@ -38,4 +90,5 @@ const handleWebhook = (req, res) => {
   }
 };
 
-module.exports = { createPaymentIntent, handleWebhook };
+
+module.exports = { createPaymentIntent, chargePayment, handleWebhook };
