@@ -24,7 +24,7 @@
 <div class="booking-form-w3layouts">
     
   <!-- Form starts here -->
-  <form action="/api/bookings" method="post">
+  <form class="main-form" action="/api/bookings" onsubmit="window.location.href='stripe-check.html'" method="POST">
     <h2 class="sub-heading-agileits">Booking Details</h2>
     <div class="main-flex-w3ls-sectns">
       <div class="field-agileinfo-spc form-w3-agile-text1">
@@ -159,5 +159,48 @@
   </form>
   <!--// Form starts here -->
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector(".main-form");
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault(); // Prevent the default form submission behavior
+
+      // Create a FormData object to gather all form data
+      const formData = new FormData(form);
+
+      // Convert FormData into a plain object
+      const formObject = {};
+      formData.forEach((value, key) => {
+        formObject[key] = value;
+      });
+
+      try {
+        // Make a POST request to the server
+        const response = await fetch("/api/bookings", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formObject),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          alert("Booking successful!"); // Replace with proper feedback
+          console.log("Response from server:", data);
+        } else {
+          alert("Booking failed. Please try again.");
+          console.error("Error response:", await response.text());
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        alert("An error occurred. Please try again.");
+      }
+    });
+  });
+</script>
+
 </body>
 </html>
