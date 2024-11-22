@@ -1412,3 +1412,122 @@ address {
 	background: var(--yale-blue);
 	border-color: var(--yale-blue);
 }
+
+
+/* -------------------------------------- */
+/* chatbot css */
+/* Chatbot container */
+/* Chatbot container */
+#chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px; /* Changed `left` to `right` for a more standard placement */
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+}
+
+/* Chatbot icon (circle) */
+#chatbot-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #0056b3; /* Bluish color */
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#chatbot-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Chatbot iframe */
+#chatbot-frame {
+    width: 350px;
+    height: 500px;
+    position: fixed;
+    bottom: 90px;
+    left: 20px;
+    border: none;
+    display: none; /* Hidden by default */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f8f9fa;
+    flex-direction: column; /* Ensures consistent layout */
+}
+
+/* Chatbot header */
+#chatbot-header {
+    background-color: #0056b3; /* Bluish theme */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* Chatbot body */
+.chatbot-body {
+    padding: 15px;
+    font-size: 14px;
+    color: #333;
+    overflow-y: auto;
+    /* height: calc(100% - 100px); Adjusted for header and footer height */
+    box-sizing: border-box; /* Ensures padding doesn't affect dimensions */
+}
+
+/* Chatbot footer */
+.chatbot-footer {
+    padding: 10px;
+    display: flex;
+    /* gap: 10px; */
+    border-top: 1px solid #ddd;
+    background-color: #fff; /* White background for contrast */
+}
+
+.chatbot-footer input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+}
+
+.chatbot-footer button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.chatbot-footer button:hover {
+    background-color: #0056b3;
+}
+
+/* Mobile-friendly responsiveness */
+@media (max-width: 500px) {
+	#chatbot-frame {
+        width: 90%;
+        height: 80%; /* Adjust to avoid vertical scrolling */
+        bottom: 10px;
+        left: 5%;
+    }
+
+    .chatbot-footer button {
+        padding: 10px;
+    }
+}

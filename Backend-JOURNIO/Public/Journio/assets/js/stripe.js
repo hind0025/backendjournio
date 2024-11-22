@@ -71,7 +71,7 @@ form.addEventListener('submit', async (event) => {
 
         if (paymentIntent && paymentIntent.status === 'succeeded') {
             alert('Payment successful!');
-            window.location.href = '/index.html'; // Redirect to a success page
+            window.location.href = '/home'; // Redirect to a success page
         } else {
             alert('Payment failed. Please try again.');
         }
