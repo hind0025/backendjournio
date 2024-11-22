@@ -4,7 +4,7 @@ const router = express.Router();
 const ratingform=require('../models/Rating')
 
 // Submit rating and feedback
-router.post('/submit', submitRating);
+router.post('/feedback', submitRating);
 
 // Get ratings for a service
 router.get('/:serviceId', getServiceRatings);
