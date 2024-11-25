@@ -44,3 +44,27 @@ window.addEventListener("scroll", function () {
   }
 
 });
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const bookNowButtons = document.querySelectorAll(".book-now-btn");
+
+  bookNowButtons.forEach((button) => {
+    button.addEventListener("click", (event) => {
+      const price = button.getAttribute("data-price"); // Get price from the button
+      const title = button.getAttribute("data-title"); // Get package title
+
+      // Redirect to the payment page or open the payment modal
+      openPaymentModal(price, title);
+    });
+  });
+});
+
+function openPaymentModal(price, title) {
+  // Store price and title for the payment process
+  sessionStorage.setItem("selectedPrice", price);
+  sessionStorage.setItem("selectedTitle", title);
+
+  // Redirect to the payment page (or show a modal)
+  window.location.href = "stripe-check.html";
+}
