@@ -35,7 +35,7 @@ form.addEventListener('submit', async (event) => {
 
     try {
         // Step 1: Create a PaymentIntent via your backend
-        const intentResponse = await fetch('http://127.0.0.1:5000/api/payments/create-payment-intent', {
+        const intentResponse = await fetch('http://127.0.0.1:6001/api/payments/create-payment-intent', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ form.addEventListener('submit', async (event) => {
 
         if (paymentIntent && paymentIntent.status === 'succeeded') {
             alert('Payment successful!');
-            window.location.href = '/home'; // Redirect to a success page
+            window.location.href = '/#home'; // Redirect to a success page
         } else {
             alert('Payment failed. Please try again.');
         }
