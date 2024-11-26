@@ -167,11 +167,7 @@ form.addEventListener('submit', async (event) => {
 
         if (paymentIntent && paymentIntent.status === 'succeeded') {
             alert('Payment successful!');
-<<<<<<< HEAD
-            window.location.href = '/Backend-JOURNIO/Public/Journio/index.html'; 
-=======
-            window.location.href = '/#home'; // Redirect to a success page
->>>>>>> e127b47a297585f63ce53015f123dcea8cffd98f
+            window.location.href = '/Backend-JOURNIO/Public/Journio/index.html'; // Redirect to a success page
         } else {
             alert('Payment failed. Please try again.');
         }
