@@ -109,11 +109,11 @@ if (packageDetails) {
 }
 
 // Payment currency
-const currency = "inr"; // Update the currency as per your need
+const currency = "inr"; 
 
-// Handle form submission
+
 form.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault(); 
 
     // Retrieve the cardholder name from the input field
     const nameInput = document.getElementById('name');
@@ -131,7 +131,7 @@ form.addEventListener('submit', async (event) => {
 
     try {
         // Step 1: Create a PaymentIntent via your backend
-        const intentResponse = await fetch('http://127.0.0.1:6001/api/payments/create-payment-intent', {
+        const intentResponse = await fetch('http://127.0.0.1:5000/api/payments/create-payment-intent', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -167,7 +167,7 @@ form.addEventListener('submit', async (event) => {
 
         if (paymentIntent && paymentIntent.status === 'succeeded') {
             alert('Payment successful!');
-            window.location.href = '/Backend-JOURNIO/Public/Journio/index.html'; // Redirect to a success page
+            window.location.href = '/#home'; // Redirect to a success page
         } else {
             alert('Payment failed. Please try again.');
         }
