@@ -2,6 +2,11 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
+// In-memory store to track logged-out tokens
+const loggedOutTokens = new Set();
+
+
 exports.signup = async (req, res) => {
     const body = req.body;
     console.log('Signup Request Body:', body); 
@@ -41,4 +46,22 @@ exports.login = async (req, res) => {
         console.error('Login Error:', err);
         res.status(500).json({ message: 'Server error' });
     }
+};
+
+
+exports.logout = (req, res) => {
+    const authHeader = req.header('Authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(400).json({ message: 'Authorization header missing or malformed' });
+    }
+
+    const token = authHeader.split(' ')[1];
+
+    // Add the token to the logged-out set
+    loggedOutTokens.add(token);
+
+    // Optionally, set a timeout to clear the token after expiration
+    setTimeout(() => loggedOutTokens.delete(token), 3600000); // 1 hour in milliseconds
+
+    res.status(200).json({ message: 'Successfully logged out' });
 };

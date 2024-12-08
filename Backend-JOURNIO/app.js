@@ -8,6 +8,10 @@ const ratingRoutes = require('./routes/Ratingroute');
 
 const geminiRoutes = require('./routes/gemini');
 const paymentRoutes = require('./routes/paymentRoutes');
+
+
+const authMiddleware = require('./middleware/authMiddleware'); // Auth middlewar
+
 const cors = require('cors');
 const app = express();
 app.use(cors());

@@ -78,9 +78,17 @@
                },
                body: JSON.stringify(data),
             });
+            
+            const responseData = await response.json();
+            console.log(responseData);
 
             if (response.ok) {
                // Show success notification
+               
+               const { token } = responseData; // Destructure token from the response
+               localStorage.setItem('authToken', token);
+
+
                notification.textContent = 'Login Successful!';
                notification.classList.add('show');
 
