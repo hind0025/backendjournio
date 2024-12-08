@@ -71,7 +71,7 @@
          const data = Object.fromEntries(formData.entries());
 
          try {
-            const response = await fetch('/api/auth/login', {
+            const response = await fetch('http://127.0.0.1:5000/api/auth/login', {
                method: 'POST',
                headers: {
                   'Content-Type': 'application/json',
@@ -87,7 +87,7 @@
                // Redirect to Home after 2 seconds
                setTimeout(() => {
                   notification.classList.remove('show');
-                  window.location.href = '/'; // Update with your Home page URL
+                  window.location.href = '/Backend-JOURNIO/Public/Journio/index.html'; // Update with your Home page URL
                }, 2000);
             } else {
                const errorData = await response.json();
@@ -107,7 +107,7 @@
          const data = Object.fromEntries(formData.entries());
 
          try {
-            const response = await fetch('/api/auth/signup', {
+            const response = await fetch('http://127.0.0.1:5000/api/auth/signup', {
                method: 'POST',
                headers: {
                   'Content-Type': 'application/json',
@@ -123,7 +123,7 @@
                // Redirect to Home after 2 seconds
                setTimeout(() => {
                   notification.classList.remove('show');
-                  window.location.href = '/'; // Update with your Home page URL
+                  window.location.href = '/Backend-JOURNIO/Public/Journio/index.html'; // Update with your Home page URL
                }, 2000);
             } else {
                const errorData = await response.json();

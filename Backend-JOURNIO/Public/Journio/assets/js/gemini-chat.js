@@ -21,7 +21,7 @@ sendButton.addEventListener('click', async () => {
     userInput.value = ''; // Clear input field
 
     try {
-        const response = await fetch('http://127.0.0.1:6001/api/gemini/chat', {
+        const response = await fetch('http://127.0.0.1:5000/api/gemini/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
