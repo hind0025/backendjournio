@@ -109,11 +109,11 @@ if (packageDetails) {
 }
 
 // Payment currency
-const currency = "inr"; // Update the currency as per your need
+const currency = "inr"; 
 
-// Handle form submission
+
 form.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault(); 
 
     // Retrieve the cardholder name from the input field
     const nameInput = document.getElementById('name');

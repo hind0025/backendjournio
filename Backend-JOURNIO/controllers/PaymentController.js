@@ -4,8 +4,8 @@ const createPaymentIntent = async (req, res) => {
 
   try {
     const paymentIntent = await stripe.paymentIntents.create({
-      amount, // e.g., $10.00 => 1000 cents
-      currency, // e.g., 'usd'
+      amount, 
+      currency, 
       payment_method_types: ['card'],
     });
 
@@ -13,7 +13,7 @@ const createPaymentIntent = async (req, res) => {
     console.log(paymentIntent);
 
     res.status(200).json({
-      clientSecret: paymentIntent.client_secret, // Use this clientSecret on the frontend
+      clientSecret: paymentIntent.client_secret,
     });
   } catch (error) {
     res.status(500).json({ error: error.message });
