@@ -8,6 +8,7 @@ const ratingRoutes = require('./routes/Ratingroute');
 
 const geminiRoutes = require('./routes/gemini');
 const paymentRoutes = require('./routes/paymentRoutes');
+const {secure}=require("./middleware/controlMiddleware")
 
 
 const authMiddleware = require('./middleware/authMiddleware'); // Auth middlewar
@@ -54,7 +55,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/gemini', geminiRoutes); 
 
-app.use('/api/ratings', ratingRoutes);
+app.use('/api/ratings',secure,ratingRoutes);
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

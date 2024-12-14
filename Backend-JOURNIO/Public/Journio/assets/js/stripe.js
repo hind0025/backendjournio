@@ -167,7 +167,7 @@ form.addEventListener('submit', async (event) => {
 
         if (paymentIntent && paymentIntent.status === 'succeeded') {
             alert('Payment successful!');
-            window.location.href = '/Backend-JOURNIO/Public/Journio/index.html'; 
+            window.location.href = '/'; 
         } else {
             alert('Payment failed. Please try again.');
         }
