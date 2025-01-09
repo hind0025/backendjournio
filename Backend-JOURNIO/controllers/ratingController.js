@@ -1,4 +1,5 @@
 const RatingModel = require('../models/Rating');
+const token=require("jsonwebtoken")
 
 // Submit rating and feedback
 const submitRating = async (req, res) => {
@@ -33,5 +34,18 @@ const getServiceRatings = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// const secureRating=async(req,res)=>
+// {
+//   const{email}=req.body;
+//   try{
+//     const security=await RatingModel.find({Email})
+//     res.status(200).json({});
+//   }
+//   catch(error)
+//   {
+//     res.status(400).json({error:error.message});
+//   }
+// }
 
 module.exports = { submitRating, getServiceRatings };
