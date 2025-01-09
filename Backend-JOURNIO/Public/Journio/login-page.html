@@ -83,19 +83,18 @@
             console.log(responseData);
 
             if (response.ok) {
-               // Show success notification
-               
                const { token } = responseData; // Destructure token from the response
-               localStorage.setItem('authToken', token);
+               setCookie('authToken', token); // Set as a session cookie
+               deleteSessionCookiesIfIdle();
 
-
+               // Show success notification
                notification.textContent = 'Login Successful!';
                notification.classList.add('show');
 
                // Redirect to Home after 2 seconds
                setTimeout(() => {
                   notification.classList.remove('show');
-                  window.location.href = '/Backend-JOURNIO/Public/Journio/index.html'; // Update with your Home page URL
+                  window.location.href = '/'; // Update with your Home page URL
                }, 2000);
             } else {
                const errorData = await response.json();
@@ -124,14 +123,13 @@
             });
 
             if (response.ok) {
-               // Show success notification
                notification.textContent = 'Sign-Up Successful!';
                notification.classList.add('show');
 
                // Redirect to Home after 2 seconds
                setTimeout(() => {
                   notification.classList.remove('show');
-                  window.location.href = '/Backend-JOURNIO/Public/Journio/index.html'; // Update with your Home page URL
+                  window.location.href = '/'; // Update with your Home page URL
                }, 2000);
             } else {
                const errorData = await response.json();
@@ -143,7 +141,45 @@
          }
       });
 
-      // Function to Show Error Notification
+      function setCookie(cname, cvalue) {
+         // Create a session cookie (no expiration date set)
+         document.cookie = `${cname}=${cvalue}; path=/;`;
+      }
+      
+      function deleteSessionCookiesIfIdle() {
+         let idleTime = 0;
+         const idleTimeout = 10000; // 10 seconds
+
+         function resetIdleTime() {
+            console.log('User activity detected, resetting idle time.');
+            idleTime = 0;
+         }
+
+         document.addEventListener('mousemove', resetIdleTime);
+         document.addEventListener('keydown', resetIdleTime);
+         document.addEventListener('scroll', resetIdleTime);
+
+         setInterval(() => {
+            idleTime += 1000;
+            console.log(`Idle time: ${idleTime} ms`);
+
+            if (idleTime >= idleTimeout) {
+               console.log('User is idle. Deleting session cookies.');
+
+               document.cookie.split(';').forEach(cookie => {
+                  const [name] = cookie.split('=').map(part => part.trim());
+                  if (name === 'authToken') {
+                     document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+                     console.log(`Deleted cookie: ${name}`);
+                  }
+               });
+
+               console.log('Remaining cookies:', document.cookie);
+            }
+         }, 1000);
+      }
+      deleteSessionCookiesIfIdle();
+
       function showErrorNotification(message) {
          notification.textContent = message;
          notification.classList.add('show', 'error');
