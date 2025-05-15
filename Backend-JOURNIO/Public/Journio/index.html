@@ -26,6 +26,21 @@
 		href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap"
 		rel="stylesheet">
 </head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-272C9R3078"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-272C9R3078');
+  gtag('event', 'event_name', {
+  event_category: 'category_name',
+  event_label: 'label_name',
+  value: 1
+});
+
+</script>
 
 <body id="top">
 
@@ -923,7 +938,42 @@
 	<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 	<script src="./assets/js/logout.js"></script>
 
+   <!-- <script>
+		function deleteSessionCookiesIfIdle() {
+			let idleTime = 0;
+			const idleTimeout = 10000; // 10 seconds
 
+			function resetIdleTime() {
+				 console.log('User activity detected, resetting idle time.');
+				 idleTime = 0;
+			}
+
+			document.addEventListener('mousemove', resetIdleTime);
+			document.addEventListener('keydown', resetIdleTime);
+			document.addEventListener('scroll', resetIdleTime);
+
+			setInterval(() => {
+				 idleTime += 1000;
+				 console.log(`Idle time: ${idleTime} ms`);
+
+				 if (idleTime >= idleTimeout) {
+						console.log('User is idle. Deleting session cookies.');
+
+						document.cookie.split(';').forEach(cookie => {
+							 const [name] = cookie.split('=').map(part => part.trim());
+							 if (name === 'authToken') {
+									document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+									console.log(`Deleted cookie: ${name}`);
+							 }
+						});
+
+						console.log('Remaining cookies:', document.cookie);
+				 }
+			}, 1000);
+	 }
+	 deleteSessionCookiesIfIdle();
+
+	 </script> -->
 
 
 	<!-- 

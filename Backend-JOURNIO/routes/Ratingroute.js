@@ -1,10 +1,14 @@
 const express = require('express');
 const { submitRating, getServiceRatings } = require('../controllers/ratingController');
 const router = express.Router();
-const ratingform=require('../models/Rating')
+const ratingform=require('../models/Rating');
+const authMiddleware = require('../middleware/authMiddleware');
+//const{loggedOutTokens}=require('../middleware/authMiddleware')
+const{secure}=require("../middleware/controlMiddleware")
+
 
 // Submit rating and feedback
-router.post('/feedback', submitRating);
+router.post('/feedback',secure, submitRating,);
 
 // Get ratings for a service
 router.get('/:serviceId', getServiceRatings);

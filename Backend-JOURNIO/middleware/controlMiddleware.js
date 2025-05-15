@@ -1,9 +1,14 @@
-const jwt = require('jsonwebtoken');
+const secureRating=require("../models/Rating")
+const jwt=require("jsonwebtoken")
+const mongoose = require('mongoose');
+require('dotenv').config(); 
+
+
 
 // In-memory store to track logged-out tokens (for simplicity, consider a better store like Redis for production)
-const loggedOutTokens = new Set();
-
-module.exports = (req, res, next) => {
+//const lo = new Set();
+const tokenss=new Set();
+const secure = (req, res, next) => {
   try {
     // Retrieve token from Authorization header
     const authHeader = req.header('Authorization');
@@ -15,7 +20,7 @@ module.exports = (req, res, next) => {
     const token = authHeader.split(' ')[1];
 
     // Check if token is logged out
-    if (loggedOutTokens.has(token)) {
+    if (tokenss.has(token)) {
       return res.status(401).json({ message: 'Token has been logged out, please log in again' });
     }
 
@@ -40,5 +45,5 @@ module.exports = (req, res, next) => {
     res.status(500).json({ message: 'Internal server error during authentication' });
   }
 };
-//module.exports = { loggedOutTokens };
+module.exports = { secure };
 //checking
