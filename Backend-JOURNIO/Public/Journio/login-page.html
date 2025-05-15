@@ -85,13 +85,18 @@
             if (response.ok) {
                // Show success notification
                
-               const { token } = responseData; // Destructure token from the response
-               localStorage.setItem('authToken', token);
-
-
+               const { token } = responseData; 
+               // Destructure token from the response
+               
+              //localStorage.setItem('authToken', token);
+             
+           setCookie('authToken', token, 1);
+           deleteSessionCookiesIfIdle();
+              
                notification.textContent = 'Login Successful!';
                notification.classList.add('show');
-
+             //  Set-Cookie: <authToken>=<token>
+               
                // Redirect to Home after 2 seconds
                setTimeout(() => {
                   notification.classList.remove('show');
@@ -142,6 +147,49 @@
             showErrorNotification('Something went wrong. Please try again.');
          }
       });
+
+      function setCookie(cname, cvalue, exdays) {
+         const d = new Date();
+         d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+         const expires = `expires=${d.toUTCString()}`;
+         document.cookie = `${cname}=${cvalue}; ${expires}; path=/`;
+      }
+   function deleteSessionCookiesIfIdle() {
+   let idleTime = 0;
+   const idleTimeout = 10000; // 10 seconds
+
+   // Reset idle time on user activity
+   function resetIdleTime() {
+      idleTime = 0;
+   }
+
+   // Detect user activity
+   document.addEventListener('mousemove', resetIdleTime);
+   document.addEventListener('keydown', resetIdleTime);
+   document.addEventListener('scroll', resetIdleTime);
+
+   // Periodically check for idle time
+   setInterval(() => {
+      idleTime += 1000; // Increment idle time by 1 second
+      if (idleTime >= idleTimeout) {
+         console.log('User idle. Attempting to delete cookies.');
+
+         // Delete cookies
+         document.cookie.split(';').forEach(cookie => {
+            const [name] = cookie.split('=').map(part => part.trim());
+            if (name === 'authToken') {
+               document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+               console.log(`Deleted cookie: ${name}`);
+            }
+         });
+
+         // Log remaining cookies for verification
+         console.log('Remaining cookies:', document.cookie);
+      }
+   }, 1000); // Check every second
+}
+ // Check every 1 second
+
 
       // Function to Show Error Notification
       function showErrorNotification(message) {
